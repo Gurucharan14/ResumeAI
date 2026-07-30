@@ -4,6 +4,7 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 
 import { analyzeResume } from "../services/resumeService";
 import AnalysisResult from "../components/analysis/AnalysisResult";
+import toast from "react-hot-toast";
 
 function AnalyzeResume() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function AnalyzeResume() {
 
   const handleAnalyze = async () => {
     if (!jobDescription.trim()) {
-      alert("Please enter the Job Description.");
+     toast.error("Please enter the Job Description.");
       return;
     }
 
@@ -30,7 +31,7 @@ function AnalyzeResume() {
       setAnalysis(response);
     } catch (error) {
       console.error(error);
-      alert("Failed to analyze resume.");
+      toast.error("Failed to analyze resume.");
     } finally {
       setLoading(false);
     }

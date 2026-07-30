@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Upload, FileText, X, ArrowLeft } from "lucide-react";
 import { useResume } from "../context/ResumeContext";
 import { uploadResume } from "../services/resumeService";
+import toast from "react-hot-toast";
 
 function UploadResume() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function UploadResume() {
   ];
 
   if (!allowedTypes.includes(selectedFile.type)) {
-    alert("Only PDF, DOC and DOCX files are allowed.");
+    toast.error("Only PDF, DOC and DOCX files are allowed.");
     return;
   }
 
@@ -32,7 +33,7 @@ function UploadResume() {
 
   const handleUpload = async () => {
   if (!file) {
-    alert("Please choose a resume first.");
+    toast.error("Please choose a resume first.");
     return;
   }
 
@@ -49,7 +50,7 @@ function UploadResume() {
       score: uploadedResume.aiScore,
     });
 
-    alert("Resume uploaded successfully!");
+    toast.success("Resume uploaded successfully!");
 
     navigate("/dashboard");
 
@@ -57,7 +58,7 @@ function UploadResume() {
 
     console.error(error);
 
-    alert("Upload failed!");
+    toast.error("Upload failed!");
 
   } finally {
 

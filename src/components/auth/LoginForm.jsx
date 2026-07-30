@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../common/ui/Input";
 import { loginUser } from "../../services/authService";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ localStorage.setItem("userEmail", email.trim().toLowerCase());
 // Save JWT Token
 localStorage.setItem("token", response.token);
 
-  alert(response.message);
+  toast.success(response.message);
 
   navigate("/dashboard");
 }else {
@@ -66,7 +67,7 @@ localStorage.setItem("token", response.token);
   }
 } catch (error) {
   console.error(error);
-
+    toast.error("Something went wrong. Please try again.");
   setErrors({
     general: "Something went wrong. Please try again.",
   });

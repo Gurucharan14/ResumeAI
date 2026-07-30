@@ -6,6 +6,7 @@ import { logout } from "../utils/auth";
 import DashboardHeader from "../dashboard/DashboardHeader";
 import StatsCards from "../dashboard/StatsCards";
 import ResumeCard from "../dashboard/ResumeCard";
+import toast from "react-hot-toast";
 
 import {
   getAllResumes,
@@ -51,10 +52,10 @@ function Dashboard() {
       await deleteResumeById(id);
       await fetchResumes();
 
-      alert("Resume deleted successfully!");
+      toast.success("Resume deleted successfully!");
     } catch (error) {
       console.error(error);
-      alert("Failed to delete resume.");
+      toast.error("Failed to delete resume.");
     }
   };
 

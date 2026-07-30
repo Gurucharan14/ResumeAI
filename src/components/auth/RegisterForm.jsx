@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../common/ui/Input";
 import { Eye, EyeOff } from "lucide-react";
 import { registerUser } from "../../services/authService";
+import toast from "react-hot-toast";
 
 function RegisterForm() {
   const navigate = useNavigate();
@@ -90,7 +91,7 @@ function RegisterForm() {
       });
 
       if (response.success) {
-        alert(response.message);
+        toast.success(response.message);
 
         setFullName("");
         setEmail("");
@@ -100,13 +101,13 @@ function RegisterForm() {
 
         navigate("/login");
       } else {
-        alert(response.message);
+        toast.error(response.message);
       }
     } catch (error) {
       if (error.response?.status === 400) {
         setErrors(error.response.data);
       } else {
-        alert("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.");
       }
     } finally {
       setLoading(false);
