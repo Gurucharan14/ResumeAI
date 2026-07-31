@@ -16,7 +16,7 @@ function AnalyzeResume() {
 
   const handleAnalyze = async () => {
     if (!jobDescription.trim()) {
-     toast.error("Please enter the Job Description.");
+      toast.error("Please enter the Job Description.");
       return;
     }
 
@@ -29,9 +29,16 @@ function AnalyzeResume() {
       );
 
       setAnalysis(response);
+
     } catch (error) {
       console.error(error);
-      toast.error("Failed to analyze resume.");
+
+      const message =
+        error.response?.data ||
+        "Failed to analyze resume. Please try again.";
+
+      toast.error(message);
+
     } finally {
       setLoading(false);
     }
