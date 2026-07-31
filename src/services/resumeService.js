@@ -29,10 +29,12 @@ export const deleteResumeById = async (id) => {
   await axiosInstance.delete(`/api/resumes/${id}`);
 };
 
-// View Resume
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:8080";
+
 export const viewResume = (id) => {
   window.open(
-    `http://localhost:8080/api/resumes/view/${id}?token=${localStorage.getItem("token")}`,
+    `${API_URL}/api/resumes/view/${id}?token=${localStorage.getItem("token")}`,
     "_blank"
   );
 };
